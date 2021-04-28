@@ -1,0 +1,24 @@
+CREATE DATABASE IF NOT EXISTS epytodo;
+
+CREATE TABLE IF NOT EXISTS epytodo.user (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`email` VARCHAR(255) NOT NULL UNIQUE,
+	`password` VARCHAR(255) NOT NULL,
+	`name` VARCHAR(255) NOT NULL,
+	`firstname` VARCHAR(255) NOT NULL,
+	`created_at` TIMESTAMP NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+CREATE TABLE IF NOT EXISTS epytodo.todo (
+	`id` INT NOT NULL AUTO_INCREMENT,
+	`title` VARCHAR(255) NOT NULL,
+	`description` VARCHAR(255) NOT NULL,
+	`created_at` TIMESTAMP NOT NULL,
+	`due_time` DATETIME NOT NULL,
+	`status` VARCHAR(255) NOT NULL DEFAULT 'not started',
+	`user_id` INT NOT NULL,
+	PRIMARY KEY (`id`)
+);
+
+ALTER TABLE epytodo.todo ADD CONSTRAINT `todo_fk0` FOREIGN KEY (`user_id`) REFERENCES `user`(`id`);
